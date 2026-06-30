@@ -1,11 +1,15 @@
 import { Provider } from "react-redux";
-import Body from "./components/Body";
+import Body from "./components/layout/Body";
 import store from "./utils/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainContainer from "./components/MainContainer";
-import WatchPage from "./components/WatchPage";
-import FeedPage from "./components/FeedPage";
-import ResultsPage from "./components/ResultsPage";
+import MainContainer from "./components/pages/MainContainer";
+import WatchPage from "./components/pages/WatchPage";
+import FeedPage from "./components/pages/FeedPage";
+import ResultsPage from "./components/pages/ResultsPage";
+import ShortsPage from "./components/shorts/ShortsPage";
+import SettingsPage from "./components/pages/SettingsPage";
+import ChannelPage from "./components/pages/ChannelPage";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const appRouter = createBrowserRouter([
   {
@@ -14,6 +18,10 @@ const appRouter = createBrowserRouter([
     children: [
       { path: "/", element: <MainContainer /> },
       { path: "watch", element: <WatchPage /> },
+      { path: "feed/shorts", element: <ShortsPage /> },
+      { path: "shorts", element: <ShortsPage /> },
+      { path: "feed/settings", element: <SettingsPage /> },
+      { path: "channel/:channelId", element: <ChannelPage /> },
       { path: "feed/:slug", element: <FeedPage /> },
       { path: "results", element: <ResultsPage /> },
     ],
@@ -23,7 +31,9 @@ const appRouter = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
-      <RouterProvider router={appRouter} />
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID || ""}>
+        <RouterProvider router={appRouter} />
+      </GoogleOAuthProvider>
     </Provider>
   );
 }

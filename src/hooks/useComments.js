@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { COMMENTS_API } from "../utils/constants";
 
-// Raw YouTube comment (top-level OR reply) -> uniform node the recursion understands.
 const normalize = (raw) => {
   const s = raw.snippet;
   return {
     id: raw.id,
     author: s.authorDisplayName,
     avatar: s.authorProfileImageUrl,
-    text: s.textOriginal, // plain text — textDisplay carries HTML we'd have to sanitize
+    text: s.textOriginal,
     likeCount: s.likeCount ?? 0,
     publishedAt: s.publishedAt,
     replies: [],
@@ -29,12 +28,12 @@ const useComments = (videoId) => {
     const run = async () => {
       try {
         const res = await fetch(COMMENTS_API(videoId));
-        if (res.status === 403) return active && setDisabled(true); // comments off (or quota)
+        if (res.status === 403) return active && setDisabled(true);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const items = (await res.json()).items ?? [];
         const tree = items.map((thread) => {
           const node = normalize(thread.snippet.topLevelComment);
-          node.replies = (thread.replies?.comments ?? []).map(normalize); // 1 level of real replies
+          node.replies = (thread.replies?.comments ?? []).map(normalize);
           return node;
         });
         if (active) setComments(tree);
@@ -46,9 +45,7 @@ const useComments = (videoId) => {
     };
 
     run();
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, [videoId]);
 
   return { comments, disabled, loading };

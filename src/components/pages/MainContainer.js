@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import ButtonList from "./ButtonList";
-import VideoContainer from "./VideoContainer";
-import { getChipFilter } from "../utils/chips";
+import ButtonList from "../common/ButtonList";
+import VideoContainer from "../video/VideoContainer";
+import { getChipFilter } from "../../utils/chips";
 
 const MainContainer = () => {
   const activeChip = useSelector((store) => store.app.activeChip);

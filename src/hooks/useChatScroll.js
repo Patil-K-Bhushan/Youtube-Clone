@@ -5,7 +5,7 @@ const useChatScroll = (trigger, paused) => {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || paused) return; 
+    if (!el || paused) return;
     const nearBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 120;
     if (nearBottom) el.scrollTop = el.scrollHeight;
   }, [trigger, paused]);

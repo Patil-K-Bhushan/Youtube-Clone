@@ -8,6 +8,7 @@ const appSlice = createSlice({
     isMenuOpen: wideScreen,
     lastOpen: wideScreen,
     activeChip: "All",
+    darkMode: typeof window !== "undefined" ? localStorage.getItem("theme") === "dark" : false,
   },
   reducers: {
     toggleMenu: (state) => {
@@ -23,9 +24,13 @@ const appSlice = createSlice({
     setActiveChip: (state, action) => {
       state.activeChip = action.payload;
     },
+    toggleTheme: (state) => {
+      state.darkMode = !state.darkMode;
+      localStorage.setItem("theme", state.darkMode ? "dark" : "light");
+    },
   },
 });
 
-export const { toggleMenu, collapseForWatch, restoreMenu, setActiveChip } =
+export const { toggleMenu, collapseForWatch, restoreMenu, setActiveChip, toggleTheme } =
   appSlice.actions;
 export default appSlice.reducer;

@@ -11,9 +11,9 @@ const VideoPlayer = () => {
     <div className="aspect-video w-full overflow-hidden rounded-xl bg-black">
       <iframe
         className="h-full w-full"
-        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0`}
         title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
     </div>

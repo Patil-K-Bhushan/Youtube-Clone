@@ -1,13 +1,13 @@
 import { useSearchParams } from "react-router-dom";
-import useCollapseSidebar from "../hooks/useCollapseSidebar";
-import useVideoById from "../hooks/useVideoById";
-import WatchContext from "../context/WatchContext";
-import VideoPlayer from "./watch/VideoPlayer";
-import VideoMeta from "./watch/VideoMeta";
-import DescriptionBox from "./watch/DescriptionBox";
-import CommentsSection from "./watch/CommentsSection";
-import SuggestedVideos from "./watch/SuggestedVideos";
-import LiveChat from "./watch/LiveChat";
+import useCollapseSidebar from "../../hooks/useCollapseSidebar";
+import useVideoById from "../../hooks/useVideoById";
+import WatchContext from "../../context/WatchContext";
+import VideoPlayer from "../watch/VideoPlayer";
+import VideoMeta from "../watch/VideoMeta";
+import DescriptionBox from "../watch/DescriptionBox";
+import CommentsSection from "../watch/CommentsSection";
+import SuggestedVideos from "../watch/SuggestedVideos";
+import LiveChat from "../watch/LiveChat";
 
 const WatchPage = () => {
   useCollapseSidebar();
@@ -27,7 +27,10 @@ const WatchPage = () => {
           <DescriptionBox />
           <CommentsSection />
         </div>
-        {isLive ? <LiveChat /> : <SuggestedVideos />}
+        <div className="w-full shrink-0 lg:w-96 flex flex-col gap-6">
+          {isLive && <LiveChat />}
+          <SuggestedVideos />
+        </div>
       </div>
     </WatchContext.Provider>
   );

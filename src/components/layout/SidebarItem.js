@@ -16,8 +16,8 @@ const SidebarItem = ({
       className={({ isActive }) =>
         `flex cursor-pointer items-center rounded-xl transition-all duration-200 ${
           isActive
-            ? "bg-gray-100 font-semibold"
-            : "font-normal hover:bg-gray-100"
+            ? "bg-gray-100 dark:bg-zinc-800 font-semibold text-gray-950 dark:text-white"
+            : "font-normal text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800/60"
         } ${isMenuOpen ? "gap-5 px-3 py-2" : "flex-col justify-center py-3"}`
       }
     >

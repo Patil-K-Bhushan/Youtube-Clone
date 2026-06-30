@@ -1,44 +1,6 @@
+import { NAMES, MESSAGES } from "./liveChatMocks";
+
 export const LIVE_CHAT_LIMIT = 25;
-
-const NAMES = [
-  "PixelNinja",
-  "CodeWizard",
-  "Aarav_07",
-  "StreamQueen",
-  "devFromMumbai",
-  "noobMaster69",
-  "reactFanboy",
-  "Priya.dev",
-  "GG_Gamer",
-  "lurker_99",
-  "TechBro",
-  "SaiTeja",
-  "frontend_fox",
-  "BetaTester",
-  "Anonymous_User",
-];
-
-const MESSAGES = [
-  "🔥🔥🔥",
-  "First!",
-  "LET'S GOOO",
-  "this is so cool",
-  "W stream",
-  "where you from?",
-  "POG",
-  "🐐🐐",
-  "underrated fr",
-  "❤️ from India",
-  "can you do a tutorial on this?",
-  "lol",
-  "the editing is insane",
-  "subscribed!",
-  "GG",
-  "facts",
-  "who's here in 2026?",
-  "🎉",
-  "respect 🙏",
-];
 
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const uid = () =>
@@ -50,9 +12,11 @@ export const randomChatMessage = () => ({
   text: pick(MESSAGES),
   isUser: false,
 });
-export const makeUserMessage = (text) => ({
+
+export const makeUserMessage = (text, user) => ({
   id: uid(),
-  author: "You",
+  author: user?.name ?? "You",
+  avatar: user?.picture ?? null,
   text,
   isUser: true,
 });
@@ -65,6 +29,7 @@ const COLORS = [
   "from-amber-500 to-yellow-400",
   "from-indigo-500 to-sky-400",
 ];
+
 export const colorFor = (name) => COLORS[name.charCodeAt(0) % COLORS.length];
 
 export const normalizeLiveMessage = (item) => ({

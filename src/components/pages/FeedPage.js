@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import VideoContainer from "./VideoContainer";
-import { FEED_CATEGORIES, AUTH_FEEDS } from "../utils/feedCategories";
+import VideoContainer from "../video/VideoContainer";
+import { FEED_CATEGORIES, AUTH_FEEDS } from "../../utils/feedCategories";
 
 const titleize = (slug = "") =>
   slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
